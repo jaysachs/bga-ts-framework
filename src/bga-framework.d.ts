@@ -1,4 +1,4 @@
-declare var gameui: GameGui;
+declare var gameui: GameGui<any>;
 declare var g_replayFrom: number | undefined;
 declare var g_gamethemeurl: string;
 declare var g_themeurl: string;
@@ -67,13 +67,13 @@ declare class Counter {
   disable(): void; // Sets value to "-"
 }
 
-declare class GameGui {
+declare class GameGui<T> {
   page_is_unloading: any;
   game_name: string;
   instantaneousMode: boolean;
   player_id: number;
   interface_min_width: number;
-  gamedatas: any;
+  gamedatas: T;
   isSpectator: boolean;
   bRealtime: boolean;
   notifqueue: GameNotifQueue;
@@ -98,7 +98,7 @@ declare class GameGui {
   protected addActionButton(id: string, label: string, method: string | eventhandler, destination?: string, blinking?: boolean, color?: string): void;
   protected checkAction(action: any): boolean;
   protected bgaPerformAction(action: string, args?: any): Promise<any>;
-  protected ajaxcall(url: string, args: object, bind: GameGui, resultHandler: (result: any) => void, allHandler?: (err: any, result?: any) => void): void;
+  protected ajaxcall(url: string, args: object, bind: GameGui<T>, resultHandler: (result: any) => void, allHandler?: (err: any, result?: any) => void): void;
   protected connect(node: ElementOrId, ontype: string, handler: any): void;
   protected disconnect(node: ElementOrId, ontype: string): void;
   protected connectClass(cls: string, ontype: string, handler: any): void;
