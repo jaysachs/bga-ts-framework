@@ -106,18 +106,20 @@ class GameBasics<T extends { players: {[player_id:number]: Player} }> extends Ga
   createHtml(divstr: string, location?: string) {
     const tempHolder = document.createElement("div");
     tempHolder.innerHTML = divstr;
-    const div = tempHolder.firstElementChild;
-    const parentNode = document.getElementById(location);
-    if (parentNode) parentNode.appendChild(div);
+    const div = tempHolder.firstElementChild!;
+    if (location) {
+      document.getElementById(location)?.appendChild(div);
+    }
     return div;
   }
 
-  createDiv(id?: string | undefined, classes?: string, location?: string) {
+  createDiv(id?: string | undefined, classes?: string, location?: string): HTMLElement {
     const div = document.createElement("div");
     if (id) div.id = id;
     if (classes) div.classList.add(...classes.split(" "));
-    const parentNode = document.getElementById(location);
-    if (parentNode) parentNode.appendChild(div);
+    if (location) {
+      document.getElementById(location)?.appendChild(div);
+    }
     return div;
   }
 
