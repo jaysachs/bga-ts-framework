@@ -103,7 +103,7 @@ declare class GameGui {
   disconnect(node: ElementOrId, ontype: string): void;
   connectClass(cls:string, ontype: string, handler: any):void;
 
-  setup(gamedatas: object): void;
+  protected setup(gamedatas: object): void;
   onEnteringState(stateName: string, args: { args: any } | null): void;
   onLeavingState(stateName: string): void;
   onUpdateActionButtons(stateName: string, args: any): void;

@@ -24,7 +24,7 @@ class GameBasics extends GameGui {
   }
 
   // state hooks
-  setup(gamedatas) {
+  protected setup(gamedatas) {
     console.log("Starting game setup", gameui);
     this.gamedatas = gamedatas;
   }
