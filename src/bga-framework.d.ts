@@ -66,7 +66,17 @@ declare class Counter {
   toValue(value: number): void; // set value with animation
   disable(): void; // Sets value to "-"
 }
-
+declare interface Player {
+  beginner: boolean;
+  color: string;
+  color_back: any | null;
+  eliminated: number;
+  id: string;
+  is_ai: string;
+  name: string;
+  score: string;
+  zombie: number;
+}
 declare class GameGui<T> {
   page_is_unloading: any;
   game_name: string;
