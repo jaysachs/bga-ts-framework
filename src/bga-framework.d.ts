@@ -78,7 +78,7 @@ declare class GameGui {
   bRealtime: boolean;
   notifqueue: GameNotifQueue;
   last_server_state: any;
-  scoreCtrl: {[player_id: number]: Counter};
+  scoreCtrl: { [player_id: number]: Counter };
   on_client_state: boolean;
   tooltips: string[];
   is_client_only: boolean;
@@ -101,7 +101,7 @@ declare class GameGui {
   protected ajaxcall(url: string, args: object, bind: GameGui, resultHandler: (result: any) => void, allHandler?: (err: any, result?: any) => void): void;
   protected connect(node: ElementOrId, ontype: string, handler: any): void;
   protected disconnect(node: ElementOrId, ontype: string): void;
-  protected connectClass(cls:string, ontype: string, handler: any):void;
+  protected connectClass(cls: string, ontype: string, handler: any): void;
 
   protected setup(gamedatas: object): void;
   protected onEnteringState(stateName: string, args: { args: any } | null): void;
@@ -112,12 +112,12 @@ declare class GameGui {
   protected setClientState(newState: string, args: object): void;
   protected restoreServerGameState(): void;
 
-  protected showMessage(msg: string, type: string):void;
-  protected showMoveUnauthorized():void;
+  protected showMessage(msg: string, type: string): void;
+  protected showMoveUnauthorized(): void;
   protected onScriptError(msg: string, url?: string, linenumber?: number): void;
   protected inherited(args: any): any;
   protected format_string_recursive(log: string, args: any[]): string;
-  protected clienttranslate_string(text:string):string;
+  protected clienttranslate_string(text: string): string;
 
   protected onScreenWidthChange(): void;
 
@@ -139,24 +139,24 @@ declare class GameGui {
     delay?: number
   ): Animation;
 
-  protected displayScoring( anchor_id:string, color:string, score:number|string, duration?:number, offset_x?:number, offset_y?: number ):void;
+  protected displayScoring(anchor_id: string, color: string, score: number | string, duration?: number, offset_x?: number, offset_y?: number): void;
   protected showBubble(anchor_id: string, text: string, delay?: number, duration?: number, custom_class?: string): void;
   protected updateCounters(counters: any): void;
 
-  protected addTooltip( nodeId:string, helpStringTranslated: string, actionStringTranslated:string, delay?:number):void;
-  protected addTooltipHtml( nodeId: string, html: string, delay?:number ):void;
-  protected addTooltipHtmlToClass(cssClass: string, html: string, delay?:number ):void;
-  protected addTooltipToClass(cssClass: string, helpStringTranslated: string, actionStringTranslated: string, delay?:number ):void;
-  protected removeTooltip( nodeId: string ):void;
+  protected addTooltip(nodeId: string, helpStringTranslated: string, actionStringTranslated: string, delay?: number): void;
+  protected addTooltipHtml(nodeId: string, html: string, delay?: number): void;
+  protected addTooltipHtmlToClass(cssClass: string, html: string, delay?: number): void;
+  protected addTooltipToClass(cssClass: string, helpStringTranslated: string, actionStringTranslated: string, delay?: number): void;
+  protected removeTooltip(nodeId: string): void;
 
-  protected confirmationDialog( message:string, yesHandler:(param:any)=>void, noHandler?:(param:any)=>void, param?: any ):void;
-  protected multipleChoiceDialog( message: string, choices: any[], callback: (choice: number)=>void ):void;
+  protected confirmationDialog(message: string, yesHandler: (param: any) => void, noHandler?: (param: any) => void, param?: any): void;
+  protected multipleChoiceDialog(message: string, choices: any[], callback: (choice: number) => void): void;
 
-  protected enablePlayerPanel(player_id: number):void;
-  protected disablePlayerPanel(player_id: number):void;
+  protected enablePlayerPanel(player_id: number): void;
+  protected disablePlayerPanel(player_id: number): void;
 
-  protected dontPreloadImage(image_file_name: string):void;
-  protected ensureSpecificGameImageLoading(list: string[]):void;
+  protected dontPreloadImage(image_file_name: string): void;
+  protected ensureSpecificGameImageLoading(list: string[]): void;
   protected updatePageTitle(gamestate: any);
 
   public getBoundingClientRectIgnoreZoom(element: Element): DOMRect;

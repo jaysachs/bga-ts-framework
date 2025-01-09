@@ -1,6 +1,6 @@
 // @ts-ignore
 GameGui = /** @class */ (function () {
-  function GameGui() {}
+  function GameGui() { }
   return GameGui;
 })();
 
@@ -9,7 +9,7 @@ GameGui = /** @class */ (function () {
  */
 
 class GameBasics extends GameGui {
-  protected currentState: string | undefined;
+  protected currentState: string | null;
   protected stateArgs: any;
   private pendingUpdate: boolean;
   private currentPlayerWasActive: boolean;
@@ -68,9 +68,9 @@ class GameBasics extends GameGui {
   }
 
   protected updateStatusBar(message: string): void {
-            $('gameaction_status').innerHTML = _(message);
-            $('pagemaintitletext').innerHTML = _(message);
-        }
+    $('gameaction_status').innerHTML = _(message);
+    $('pagemaintitletext').innerHTML = _(message);
+  }
 
   // utils
   debugStateInfo() {
@@ -105,7 +105,7 @@ class GameBasics extends GameGui {
   }
 */
 
-protected  createHtml(divstr: string, location?: string) {
+  protected createHtml(divstr: string, location?: string) {
     const tempHolder = document.createElement("div");
     tempHolder.innerHTML = divstr;
     const div = tempHolder.firstElementChild;
@@ -116,7 +116,7 @@ protected  createHtml(divstr: string, location?: string) {
 
   protected createDiv(id?: string | undefined, classes?: string, location?: string) {
     const div = document.createElement("div");
-    if (id) div.id  = id;
+    if (id) div.id = id;
     if (classes) div.classList.add(...classes.split(" "));
     const parentNode = document.getElementById(location);
     if (parentNode) parentNode.appendChild(div);
