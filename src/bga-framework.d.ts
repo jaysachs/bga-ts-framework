@@ -98,7 +98,7 @@ declare class GameGui<T> {
   protected addActionButton(id: string, label: string, method: string | eventhandler, destination?: string, blinking?: boolean, color?: string): void;
   protected checkAction(action: any): boolean;
   protected bgaPerformAction(action: string, args?: any): Promise<any>;
-  protected ajaxcall(url: string, args: object, bind: GameGui<T>, resultHandler: (result: any) => void, allHandler?: (err: any, result?: any) => void): void;
+  protected ajaxcall(url: string, args: object, bind: GameGui<any>, resultHandler: (result: any) => void, allHandler?: (err: any, result?: any) => void): void;
   protected connect(node: ElementOrId, ontype: string, handler: any): void;
   protected disconnect(node: ElementOrId, ontype: string): void;
   protected connectClass(cls: string, ontype: string, handler: any): void;
