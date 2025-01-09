@@ -9,7 +9,7 @@ GameGui = /** @class */ (function () {
  */
 
 class GameBasics<T extends BaseGamedatas> extends GameGui<T> {
-  currentState: string | null;
+  protected currentState: string | null;
   private pendingUpdate: boolean;
   private currentPlayerWasActive: boolean;
 
