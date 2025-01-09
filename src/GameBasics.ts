@@ -9,7 +9,7 @@ GameGui = /** @class */ (function () {
  */
 
 class GameBasics<T> extends GameGui<T> {
-  protected currentState: string | null;
+  currentState: string | null;
   private pendingUpdate: boolean;
   private currentPlayerWasActive: boolean;
 
@@ -23,12 +23,12 @@ class GameBasics<T> extends GameGui<T> {
   }
 
   // state hooks
-  protected override setup(gamedatas) {
+  override setup(gamedatas) {
     console.log("Starting game setup", gameui);
     this.gamedatas = gamedatas;
   }
 
-  protected override onEnteringState(stateName, args) {
+  override onEnteringState(stateName, args) {
     console.log("onEnteringState: " + stateName, args, this.debugStateInfo());
     this.currentState = stateName;
     // Call appropriate method
@@ -42,12 +42,12 @@ class GameBasics<T> extends GameGui<T> {
     }
   }
 
-  protected override onLeavingState(stateName) {
+  override onLeavingState(stateName) {
     console.log("onLeavingState: " + stateName, this.debugStateInfo());
     this.currentPlayerWasActive = false;
   }
 
-  protected override onUpdateActionButtons(stateName, args) {
+  override onUpdateActionButtons(stateName, args) {
     if (this.currentState != stateName) {
       // delay firing this until onEnteringState is called so they always called in same order
       this.pendingUpdate = true;
@@ -65,7 +65,7 @@ class GameBasics<T> extends GameGui<T> {
     }
   }
 
-  protected updateStatusBar(message: string): void {
+  updateStatusBar(message: string): void {
     $('gameaction_status').innerHTML = _(message);
     $('pagemaintitletext').innerHTML = _(message);
   }
@@ -103,7 +103,7 @@ class GameBasics<T> extends GameGui<T> {
   }
 */
 
-  protected createHtml(divstr: string, location?: string) {
+  createHtml(divstr: string, location?: string) {
     const tempHolder = document.createElement("div");
     tempHolder.innerHTML = divstr;
     const div = tempHolder.firstElementChild;
@@ -112,7 +112,7 @@ class GameBasics<T> extends GameGui<T> {
     return div;
   }
 
-  protected createDiv(id?: string | undefined, classes?: string, location?: string) {
+  createDiv(id?: string | undefined, classes?: string, location?: string) {
     const div = document.createElement("div");
     if (id) div.id = id;
     if (classes) div.classList.add(...classes.split(" "));
@@ -136,7 +136,7 @@ class GameBasics<T> extends GameGui<T> {
   }
 
   /** @Override onScriptError from gameui */
-  protected override onScriptError(msg, url, linenumber) {
+  override onScriptError(msg, url, linenumber) {
     if (gameui.page_is_unloading) {
       // Don't report errors during page unloading
       return;
