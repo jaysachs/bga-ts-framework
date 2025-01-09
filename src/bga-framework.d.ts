@@ -89,6 +89,7 @@ declare class GameGui {
   next_log_id: number;
   inFlight: number;
 
+  bgaSetupPromiseNotifications(): void;
   format_block(id: string, args: any): string;
   getPlayerPanelElement(player_id: number): HTMLElement;
 
@@ -115,7 +116,7 @@ declare class GameGui {
   showMoveUnauthorized():void;
   onScriptError(msg: string, url?: string, linenumber?: number): void;
   inherited(args: any): any;
-  format_string_recursive(log: string, args: any[]): string;
+  protected format_string_recursive(log: string, args: any[]): string;
   clienttranslate_string(text:string):string;
 
   onScreenWidthChange(): void;

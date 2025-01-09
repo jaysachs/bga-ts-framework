@@ -9,14 +9,16 @@ GameGui = /** @class */ (function () {
  */
 
 class GameBasics extends GameGui {
-  curstate: string | undefined;
-  pendingUpdate: boolean;
-  currentPlayerWasActive: boolean;
+  protected currentState: string | undefined;
+  protected stateArgs: any;
+  private pendingUpdate: boolean;
+  private currentPlayerWasActive: boolean;
+
   constructor() {
     super();
     console.log("game constructor");
 
-    this.curstate = null;
+    this.currentState = null;
     this.pendingUpdate = false;
     this.currentPlayerWasActive = false;
   }
@@ -29,9 +31,10 @@ class GameBasics extends GameGui {
 
   onEnteringState(stateName, args) {
     console.log("onEnteringState: " + stateName, args, this.debugStateInfo());
-    this.curstate = stateName;
+    this.currentState = stateName;
     // Call appropriate method
     args = args ? args.args : null; // this method has extra wrapper for args for some reason
+    this.stateArgs = args;
     var methodName = "onEnteringState_" + stateName;
     this.callfn(methodName, args);
 
@@ -47,7 +50,7 @@ class GameBasics extends GameGui {
   }
 
   onUpdateActionButtons(stateName, args) {
-    if (this.curstate != stateName) {
+    if (this.currentState != stateName) {
       // delay firing this until onEnteringState is called so they always called in same order
       this.pendingUpdate = true;
       //console.log('   DELAYED onUpdateActionButtons');
@@ -63,6 +66,11 @@ class GameBasics extends GameGui {
       this.currentPlayerWasActive = false;
     }
   }
+
+  protected updateStatusBar(message: string): void {
+            $('gameaction_status').innerHTML = _(message);
+            $('pagemaintitletext').innerHTML = _(message);
+        }
 
   // utils
   debugStateInfo() {
