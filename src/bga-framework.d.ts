@@ -77,7 +77,10 @@ declare interface Player {
   score: string;
   zombie: number;
 }
-declare class GameGui<T> {
+declare interface BaseGamedatas {
+  players: {[player_id:number]: Player};
+}
+declare class GameGui<T extends BaseGamedatas> {
   page_is_unloading: any;
   game_name: string;
   instantaneousMode: boolean;
