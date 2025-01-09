@@ -10,7 +10,6 @@ GameGui = /** @class */ (function () {
 
 class GameBasics<T> extends GameGui<T> {
   protected currentState: string | null;
-  protected stateArgs: any;
   private pendingUpdate: boolean;
   private currentPlayerWasActive: boolean;
 
@@ -34,7 +33,6 @@ class GameBasics<T> extends GameGui<T> {
     this.currentState = stateName;
     // Call appropriate method
     args = args ? args.args : null; // this method has extra wrapper for args for some reason
-    this.stateArgs = args;
     var methodName = "onEnteringState_" + stateName;
     this.callfn(methodName, args);
 
