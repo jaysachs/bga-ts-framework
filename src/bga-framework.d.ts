@@ -89,40 +89,40 @@ declare class GameGui {
   next_log_id: number;
   inFlight: number;
 
-  bgaSetupPromiseNotifications(): void;
-  format_block(id: string, args: any): string;
-  getPlayerPanelElement(player_id: number): HTMLElement;
+  protected bgaSetupPromiseNotifications(): void;
+  protected format_block(id: string, args: any): string;
+  protected getPlayerPanelElement(player_id: number): HTMLElement;
 
-  isCurrentPlayerActive(): boolean;
-  getActivePlayerId(): number;
-  addActionButton(id: string, label: string, method: string | eventhandler, destination?: string, blinking?: boolean, color?: string): void;
-  checkAction(action: any): boolean;
-  bgaPerformAction(action: string, args?: any): Promise<any>;
-  ajaxcall(url: string, args: object, bind: GameGui, resultHandler: (result: any) => void, allHandler?: (err: any, result?: any) => void): void;
-  connect(node: ElementOrId, ontype: string, handler: any): void;
-  disconnect(node: ElementOrId, ontype: string): void;
-  connectClass(cls:string, ontype: string, handler: any):void;
+  public isCurrentPlayerActive(): boolean;
+  protected getActivePlayerId(): number;
+  protected addActionButton(id: string, label: string, method: string | eventhandler, destination?: string, blinking?: boolean, color?: string): void;
+  protected checkAction(action: any): boolean;
+  protected bgaPerformAction(action: string, args?: any): Promise<any>;
+  protected ajaxcall(url: string, args: object, bind: GameGui, resultHandler: (result: any) => void, allHandler?: (err: any, result?: any) => void): void;
+  protected connect(node: ElementOrId, ontype: string, handler: any): void;
+  protected disconnect(node: ElementOrId, ontype: string): void;
+  protected connectClass(cls:string, ontype: string, handler: any):void;
 
   protected setup(gamedatas: object): void;
-  onEnteringState(stateName: string, args: { args: any } | null): void;
-  onLeavingState(stateName: string): void;
-  onUpdateActionButtons(stateName: string, args: any): void;
-  setupNotifications(): void;
+  protected onEnteringState(stateName: string, args: { args: any } | null): void;
+  protected onLeavingState(stateName: string): void;
+  protected onUpdateActionButtons(stateName: string, args: any): void;
+  protected setupNotifications(): void;
 
-  setClientState(newState: string, args: object): void;
-  restoreServerGameState(): void;
+  protected setClientState(newState: string, args: object): void;
+  protected restoreServerGameState(): void;
 
-  showMessage(msg: string, type: string):void;
-  showMoveUnauthorized():void;
-  onScriptError(msg: string, url?: string, linenumber?: number): void;
-  inherited(args: any): any;
+  protected showMessage(msg: string, type: string):void;
+  protected showMoveUnauthorized():void;
+  protected onScriptError(msg: string, url?: string, linenumber?: number): void;
+  protected inherited(args: any): any;
   protected format_string_recursive(log: string, args: any[]): string;
-  clienttranslate_string(text:string):string;
+  protected clienttranslate_string(text:string):string;
 
-  onScreenWidthChange(): void;
+  protected onScreenWidthChange(): void;
 
-  slideToObject(mobile_obj: string | Element, target_obj: string | Element, duration?: number, delay?: number): Animation;
-  slideToObjectPos(
+  protected slideToObject(mobile_obj: string | Element, target_obj: string | Element, duration?: number, delay?: number): Animation;
+  protected slideToObjectPos(
     mobile_obj: string | Element,
     target_obj: string | Element,
     target_x: number,
@@ -130,7 +130,7 @@ declare class GameGui {
     duration?: number,
     delay?: number
   ): Animation;
-  slideTemporaryObject(
+  protected slideTemporaryObject(
     mobile_obj_html: string,
     mobile_obj_parent: string | Element,
     from: string | Element,
@@ -139,25 +139,25 @@ declare class GameGui {
     delay?: number
   ): Animation;
 
-  displayScoring( anchor_id:string, color:string, score:number|string, duration?:number, offset_x?:number, offset_y?: number ):void;
-  showBubble(anchor_id: string, text: string, delay?: number, duration?: number, custom_class?: string): void;
-  updateCounters(counters: any): void;
+  protected displayScoring( anchor_id:string, color:string, score:number|string, duration?:number, offset_x?:number, offset_y?: number ):void;
+  protected showBubble(anchor_id: string, text: string, delay?: number, duration?: number, custom_class?: string): void;
+  protected updateCounters(counters: any): void;
 
-  addTooltip( nodeId:string, helpStringTranslated: string, actionStringTranslated:string, delay?:number):void;
-  addTooltipHtml( nodeId: string, html: string, delay?:number ):void;
-  addTooltipHtmlToClass(cssClass: string, html: string, delay?:number ):void;
-  addTooltipToClass(cssClass: string, helpStringTranslated: string, actionStringTranslated: string, delay?:number ):void;
-  removeTooltip( nodeId: string ):void;
+  protected addTooltip( nodeId:string, helpStringTranslated: string, actionStringTranslated:string, delay?:number):void;
+  protected addTooltipHtml( nodeId: string, html: string, delay?:number ):void;
+  protected addTooltipHtmlToClass(cssClass: string, html: string, delay?:number ):void;
+  protected addTooltipToClass(cssClass: string, helpStringTranslated: string, actionStringTranslated: string, delay?:number ):void;
+  protected removeTooltip( nodeId: string ):void;
 
-  confirmationDialog( message:string, yesHandler:(param:any)=>void, noHandler?:(param:any)=>void, param?: any ):void;
-  multipleChoiceDialog( message: string, choices: any[], callback: (choice: number)=>void ):void;
+  protected confirmationDialog( message:string, yesHandler:(param:any)=>void, noHandler?:(param:any)=>void, param?: any ):void;
+  protected multipleChoiceDialog( message: string, choices: any[], callback: (choice: number)=>void ):void;
 
-  enablePlayerPanel(player_id: number):void;
-  disablePlayerPanel(player_id: number):void;
+  protected enablePlayerPanel(player_id: number):void;
+  protected disablePlayerPanel(player_id: number):void;
 
-  dontPreloadImage(image_file_name: string):void;
-  ensureSpecificGameImageLoading(list: string[]):void;
-  updatePageTitle(gamestate: any);
+  protected dontPreloadImage(image_file_name: string):void;
+  protected ensureSpecificGameImageLoading(list: string[]):void;
+  protected updatePageTitle(gamestate: any);
 
-  getBoundingClientRectIgnoreZoom(element: Element): DOMRect;
+  public getBoundingClientRectIgnoreZoom(element: Element): DOMRect;
 }

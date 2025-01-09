@@ -24,12 +24,12 @@ class GameBasics extends GameGui {
   }
 
   // state hooks
-  protected setup(gamedatas) {
+  protected override setup(gamedatas) {
     console.log("Starting game setup", gameui);
     this.gamedatas = gamedatas;
   }
 
-  onEnteringState(stateName, args) {
+  protected override onEnteringState(stateName, args) {
     console.log("onEnteringState: " + stateName, args, this.debugStateInfo());
     this.currentState = stateName;
     // Call appropriate method
@@ -44,12 +44,12 @@ class GameBasics extends GameGui {
     }
   }
 
-  onLeavingState(stateName) {
+  protected override onLeavingState(stateName) {
     console.log("onLeavingState: " + stateName, this.debugStateInfo());
     this.currentPlayerWasActive = false;
   }
 
-  onUpdateActionButtons(stateName, args) {
+  protected override onUpdateActionButtons(stateName, args) {
     if (this.currentState != stateName) {
       // delay firing this until onEnteringState is called so they always called in same order
       this.pendingUpdate = true;
@@ -87,12 +87,12 @@ class GameBasics extends GameGui {
     };
     return res;
   }
+  /*
   ajaxcallwrapper(action: string, args?: any, handler?) {
     if (!args) {
       args = {};
     }
     args.lock = true;
-
     if (gameui.checkAction(action)) {
       gameui.ajaxcall(
         "/" + gameui.game_name + "/" + gameui.game_name + "/" + action + ".html",
@@ -103,8 +103,9 @@ class GameBasics extends GameGui {
       );
     }
   }
+*/
 
-  createHtml(divstr: string, location?: string) {
+protected  createHtml(divstr: string, location?: string) {
     const tempHolder = document.createElement("div");
     tempHolder.innerHTML = divstr;
     const div = tempHolder.firstElementChild;
@@ -113,7 +114,7 @@ class GameBasics extends GameGui {
     return div;
   }
 
-  createDiv(id?: string | undefined, classes?: string, location?: string) {
+  protected createDiv(id?: string | undefined, classes?: string, location?: string) {
     const div = document.createElement("div");
     if (id) div.id  = id;
     if (classes) div.classList.add(...classes.split(" "));
@@ -128,15 +129,16 @@ class GameBasics extends GameGui {
    * @param {object} args
    * @returns
    */
-  callfn(methodName, args) {
+  private callfn(methodName, args) {
     if (this[methodName] !== undefined) {
       console.log("Calling " + methodName, args);
       return this[methodName](args);
     }
     return undefined;
   }
+
   /** @Override onScriptError from gameui */
-  onScriptError(msg, url, linenumber) {
+  protected override onScriptError(msg, url, linenumber) {
     if (gameui.page_is_unloading) {
       // Don't report errors during page unloading
       return;
