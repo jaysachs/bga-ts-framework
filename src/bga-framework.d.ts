@@ -8,10 +8,10 @@ declare function _(str: string): string;
 declare function __(site: string, str: string): string;
 declare function $(text: string | Element): HTMLElement;
 
-declare const define;
-declare const ebg;
-declare const dojo;
-declare const dijit;
+declare const define: any;
+declare const ebg: any;
+declare const dojo: any;
+declare const dijit: any;
 declare type eventhandler = (event?: any) => void;
 
 type ElementOrId = Element | string;
@@ -170,7 +170,7 @@ declare class GameGui<T extends BaseGamedatas> {
 
   dontPreloadImage(image_file_name: string): void;
   ensureSpecificGameImageLoading(list: string[]): void;
-  updatePageTitle(gamestate: any);
+  updatePageTitle(gamestate: any): void;
 
   getBoundingClientRectIgnoreZoom(element: Element): DOMRect;
 }

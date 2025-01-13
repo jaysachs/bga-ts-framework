@@ -23,12 +23,12 @@ class GameBasics<T extends BaseGamedatas> extends GameGui<T> {
   }
 
   // state hooks
-  override setup(gamedatas) {
+  override setup(gamedatas: T) {
     console.log("Starting game setup", gameui);
     this.gamedatas = gamedatas;
   }
 
-  override onEnteringState(stateName, args) {
+  override onEnteringState(stateName: string, args: any) {
     console.log("onEnteringState: " + stateName, args, this.debugStateInfo());
     this.currentState = stateName;
     // Call appropriate method
@@ -42,12 +42,12 @@ class GameBasics<T extends BaseGamedatas> extends GameGui<T> {
     }
   }
 
-  override onLeavingState(stateName) {
+  override onLeavingState(stateName: string) {
     console.log("onLeavingState: " + stateName, this.debugStateInfo());
     this.currentPlayerWasActive = false;
   }
 
-  override onUpdateActionButtons(stateName, args) {
+  override onUpdateActionButtons(stateName: string, args: any) {
     if (this.currentState != stateName) {
       // delay firing this until onEnteringState is called so they always called in same order
       this.pendingUpdate = true;
@@ -65,13 +65,8 @@ class GameBasics<T extends BaseGamedatas> extends GameGui<T> {
     }
   }
 
-  updateStatusBar(message: string): void {
-    $('gameaction_status').innerHTML = _(message);
-    $('pagemaintitletext').innerHTML = _(message);
-  }
-
   // utils
-  debugStateInfo() {
+  debugStateInfo(): any {
     var iscurac = gameui.isCurrentPlayerActive();
     var replayMode = false;
     if (typeof g_replayFrom != "undefined") {
@@ -85,8 +80,8 @@ class GameBasics<T extends BaseGamedatas> extends GameGui<T> {
     };
     return res;
   }
-  /*
-  ajaxcallwrapper(action: string, args?: any, handler?) {
+
+  ajaxcallwrapper(action: string, args?: any, handler? : any): void {
     if (!args) {
       args = {};
     }
@@ -101,16 +96,15 @@ class GameBasics<T extends BaseGamedatas> extends GameGui<T> {
       );
     }
   }
-*/
 
-  createHtml(divstr: string, location?: string) {
+  createHtml(divstr: string, location?: string): HTMLElement {
     const tempHolder = document.createElement("div");
     tempHolder.innerHTML = divstr;
     const div = tempHolder.firstElementChild!;
     if (location) {
       document.getElementById(location)?.appendChild(div);
     }
-    return div;
+    return div as HTMLElement;
   }
 
   createDiv(id?: string | undefined, classes?: string, location?: string): HTMLElement {
@@ -123,22 +117,29 @@ class GameBasics<T extends BaseGamedatas> extends GameGui<T> {
     return div;
   }
 
+  updateStatusBar(message: string): void {
+    $('gameaction_status').innerHTML = _(message);
+    $('pagemaintitletext').innerHTML = _(message);
+  }
+
   /**
    *
    * @param {string} methodName
    * @param {object} args
    * @returns
    */
-  private callfn(methodName, args) {
+  private callfn(methodName: string, args: any): any {
+    // @ts-ignore
     if (this[methodName] !== undefined) {
       console.log("Calling " + methodName, args);
+      // @ts-ignore
       return this[methodName](args);
     }
     return undefined;
   }
 
   /** @Override onScriptError from gameui */
-  override onScriptError(msg, url, linenumber) {
+  override onScriptError(msg: string, url: string, linenumber: number): void {
     if (gameui.page_is_unloading) {
       // Don't report errors during page unloading
       return;
