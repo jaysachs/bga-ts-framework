@@ -129,11 +129,10 @@ class GameBasics<T extends BaseGamedatas> extends GameGui<T> {
    * @returns
    */
   private callfn(methodName: string, args: any): any {
-    // @ts-ignore
-    if (this[methodName] !== undefined) {
+    const anythis = this as any;
+    if (anythis[methodName] !== undefined) {
       console.log("Calling " + methodName, args);
-      // @ts-ignore
-      return this[methodName](args);
+      return anythis[methodName](args);
     }
     return undefined;
   }
