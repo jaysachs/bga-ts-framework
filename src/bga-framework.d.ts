@@ -19,16 +19,16 @@ type StringProperties = { [key: string]: string };
 
 declare class GameNotifQueue {
   /**
-   * Set the notification deinfed by notif_type as "synchronous"
+   * Set the notification deinfed by notif_type as 'synchronous'
    * @param notif_type - the type of notification
    * @param duration - the duration of notification wait in milliseconds
-   * If "duration" is specified: set a simple timer for it (milliseconds)
-   * If "duration" is not specified, the notification handler MUST call "setSynchronousDuration"
+   * If 'duration' is specified: set a simple timer for it (milliseconds)
+   * If 'duration' is not specified, the notification handler MUST call 'setSynchronousDuration'
    */
   setSynchronous(notif_type: string, duration?: number): void;
   /**
    * Set dynamically the duration of a synchronous notification
-   * MUST be called if your notification has not been associated with a duration in "setSynchronous"
+   * MUST be called if your notification has not been associated with a duration in 'setSynchronous'
    * @param duration - how long to hold off till next notficiation received (milliseconds)
    */
   setSynchronousDuration(duration: number): void;
@@ -48,7 +48,7 @@ declare interface Notif {
   log: string; // the log string passed from php notification
   args: any; // This is the arguments that you passed on your notification method on php
   bIsTableMsg: boolean; // is true when you use [[Main_game_logic:_yourgamename.game.php#NotifyAllPlayers|NotifyAllPlayers]] method (false otherwise)
-  channelorig: string; // information about table ID (formatted as : "/table/t[TABLE_NUMBER]")
+  channelorig: string; // information about table ID (formatted as : '/table/t[TABLE_NUMBER]')
   gamenameorig: string; // name of the game
   move_id: number; // ID of the move associated with the notification
   table_id: number; // ID of the table (comes as string)
@@ -61,10 +61,10 @@ declare class Counter {
 
   create(target: string): void; //  associate counter with existing target DOM element
   getValue(): number; //  return current value
-  incValue(by: number): number; //  increment value by "by" and animate from previous value
+  incValue(by: number): number; //  increment value by 'by' and animate from previous value
   setValue(value: number): void; //  set value, no animation
   toValue(value: number): void; // set value with animation
-  disable(): void; // Sets value to "-"
+  disable(): void; // Sets value to '-'
 }
 declare interface Player {
   beginner: boolean;

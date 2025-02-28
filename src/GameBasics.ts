@@ -15,7 +15,7 @@ class GameBasics<T extends BaseGamedatas> extends GameGui<T> {
 
   constructor() {
     super();
-    console.log("game constructor");
+    console.log('game constructor');
 
     this.currentState = null;
     this.pendingUpdate = false;
@@ -24,16 +24,16 @@ class GameBasics<T extends BaseGamedatas> extends GameGui<T> {
 
   // state hooks
   override setup(gamedatas: T) {
-    console.log("Starting game setup", gameui);
+    console.log('Starting game setup', gameui);
     this.gamedatas = gamedatas;
   }
 
   override onEnteringState(stateName: string, args: any) {
-    console.log("onEnteringState: " + stateName, args, this.debugStateInfo());
+    console.log('onEnteringState: ' + stateName, args, this.debugStateInfo());
     this.currentState = stateName;
     // Call appropriate method
     args = args ? args.args : null; // this method has extra wrapper for args for some reason
-    var methodName = "onEnteringState_" + stateName;
+    var methodName = 'onEnteringState_' + stateName;
     this.callfn(methodName, args);
 
     if (this.pendingUpdate) {
@@ -43,7 +43,7 @@ class GameBasics<T extends BaseGamedatas> extends GameGui<T> {
   }
 
   override onLeavingState(stateName: string) {
-    console.log("onLeavingState: " + stateName, this.debugStateInfo());
+    console.log('onLeavingState: ' + stateName, this.debugStateInfo());
     this.currentPlayerWasActive = false;
   }
 
@@ -56,10 +56,10 @@ class GameBasics<T extends BaseGamedatas> extends GameGui<T> {
     }
     this.pendingUpdate = false;
     if (gameui.isCurrentPlayerActive() && this.currentPlayerWasActive == false) {
-      console.log("onUpdateActionButtons: " + stateName, args, this.debugStateInfo());
+      console.log('onUpdateActionButtons: ' + stateName, args, this.debugStateInfo());
       this.currentPlayerWasActive = true;
       // Call appropriate method
-      this.callfn("onUpdateActionButtons_" + stateName, args);
+      this.callfn('onUpdateActionButtons_' + stateName, args);
     } else {
       this.currentPlayerWasActive = false;
     }
@@ -69,7 +69,7 @@ class GameBasics<T extends BaseGamedatas> extends GameGui<T> {
   debugStateInfo(): any {
     var iscurac = gameui.isCurrentPlayerActive();
     var replayMode = false;
-    if (typeof g_replayFrom != "undefined") {
+    if (typeof g_replayFrom != 'undefined') {
       replayMode = true;
     }
     var instantaneousMode = gameui.instantaneousMode ? true : false;
@@ -88,7 +88,7 @@ class GameBasics<T extends BaseGamedatas> extends GameGui<T> {
     args.lock = true;
     if (gameui.checkAction(action)) {
       gameui.ajaxcall(
-        "/" + gameui.game_name + "/" + gameui.game_name + "/" + action + ".html",
+        '/' + gameui.game_name + '/' + gameui.game_name + '/' + action + '.html',
         args, //
         gameui,
         (result) => {},
@@ -98,7 +98,7 @@ class GameBasics<T extends BaseGamedatas> extends GameGui<T> {
   }
 
   createHtml(divstr: string, location?: string): HTMLElement {
-    const tempHolder = document.createElement("div");
+    const tempHolder = document.createElement('div');
     tempHolder.innerHTML = divstr;
     const div = tempHolder.firstElementChild!;
     if (location) {
@@ -108,9 +108,9 @@ class GameBasics<T extends BaseGamedatas> extends GameGui<T> {
   }
 
   createDiv(id?: string | undefined, classes?: string, location?: string): HTMLElement {
-    const div = document.createElement("div");
+    const div = document.createElement('div');
     if (id) div.id = id;
-    if (classes) div.classList.add(...classes.split(" "));
+    if (classes) div.classList.add(...classes.split(' '));
     if (location) {
       document.getElementById(location)?.appendChild(div);
     }
@@ -131,7 +131,7 @@ class GameBasics<T extends BaseGamedatas> extends GameGui<T> {
   private callfn(methodName: string, args: any): any {
     const anythis = this as any;
     if (anythis[methodName] !== undefined) {
-      console.log("Calling " + methodName, args);
+      console.log('Calling ' + methodName, args);
       return anythis[methodName](args);
     }
     return undefined;
