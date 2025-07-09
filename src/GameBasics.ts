@@ -8,7 +8,7 @@ GameGui = /** @class */ (function () {
 /** Class that extends default bga core game class with more functionality
  */
 
-class GameBasics<T extends BaseGamedatas> extends GameGui<T> {
+class GameBasics<T extends Gamedatas> extends GameGui<T> {
   protected currentState: string | null;
   private pendingUpdate: boolean;
   private currentPlayerWasActive: boolean;
@@ -81,21 +81,21 @@ class GameBasics<T extends BaseGamedatas> extends GameGui<T> {
     return res;
   }
 
-  ajaxcallwrapper(action: string, args?: any, handler? : any): void {
-    if (!args) {
-      args = {};
-    }
-    args.lock = true;
-    if (gameui.checkAction(action)) {
-      gameui.ajaxcall(
-        '/' + gameui.game_name + '/' + gameui.game_name + '/' + action + '.html',
-        args, //
-        gameui,
-        (result) => {},
-        handler
-      );
-    }
-  }
+  // ajaxcallwrapper(action: string, args?: any, handler? : any): void {
+  //   if (!args) {
+  //     args = {};
+  //   }
+  //   args.lock = true;
+  //   if (gameui.checkAction(action)) {
+  //     gameui.ajaxcall(
+  //       '/' + gameui.game_name + '/' + gameui.game_name + '/' + action + '.html',
+  //       args, //
+  //       gameui,
+  //       (result) => {},
+  //       handler
+  //     );
+  //   }
+  // }
 
   createHtml(divstr: string, location?: string): HTMLElement {
     const tempHolder = document.createElement('div');
@@ -138,15 +138,15 @@ class GameBasics<T extends BaseGamedatas> extends GameGui<T> {
   }
 
   /** @Override onScriptError from gameui */
-  override onScriptError(msg: string, url: string, linenumber: number): void {
-    if (gameui.page_is_unloading) {
-      // Don't report errors during page unloading
-      return;
-    }
+  onScriptError(msg: string, url: string, linenumber: number): void {
+    // if (gameui.page_is_unloading) {
+      // // Don't report errors during page unloading
+      // return;
+    // }
     // In anycase, report these errors in the console
     console.error(msg);
     // cannot call super - dojo still have to used here
-    //super.onScriptError(msg, url, linenumber);
-    return this.inherited(arguments);
+    // super.onScriptError(msg, url, linenumber);
+    // return this.inherited(arguments);
   }
 }
